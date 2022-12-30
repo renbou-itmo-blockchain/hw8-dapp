@@ -1,0 +1,18 @@
+version: "2.4"
+
+services:
+  ipfs:
+    container_name: ipfs-node
+    image: ipfs/kubo:v0.17.0
+    ports:
+      - 5001:5001
+      - 8080:8080
+    volumes:
+      - ./scripts/:/container-init.d/
+      - ./frontend/dist/:/import/app
+  node:
+    container_name: hardhat-node
+    build: ./contract
+    command: node
+    ports:
+      - 8545:8545
